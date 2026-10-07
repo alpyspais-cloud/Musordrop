@@ -1,0 +1,57 @@
+﻿@model List<CS2Skins.Models.Skin>
+
+@{
+    ViewData["Title"] = "CS2 Skins";
+}
+
+<div class="hero">
+    <h1>CS2 SKINS</h1>
+    <p>Покупай любимые скины для Counter-Strike 2</p>
+
+    <a asp-controller="Shop"
+       asp-action="Index"
+       class="shop-button">
+        Перейти в магазин
+    </a>
+</div>
+
+<section class="featured">
+    <h2>Популярные скины</h2>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="skins">
+            @foreach (var skin in Model)
+            {
+                <div class="skin-card">
+                    <div class="skin-image">
+                        <img src="@skin.ImageUrl" alt="@skin.Name" />
+                    </div>
+
+                    <h3>@skin.Name</h3>
+                    <p>$@skin.Price</p>
+
+                    <div class="skin-actions">
+                        <a asp-controller="Shop"
+                           asp-action="Details"
+                           asp-route-id="@skin.Id"
+                           class="shop-button">
+                            Подробнее
+                        </a>
+
+                        <a asp-controller="Cart"
+                           asp-action="Add"
+                           asp-route-id="@skin.Id"
+                           class="shop-button secondary-button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Скины скоро появятся в магазине.</p>
+    }
+</section>

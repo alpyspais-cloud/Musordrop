@@ -1,0 +1,41 @@
+@model CS2Skins.Models.Skin
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="product-page">
+    <a asp-controller="Shop"
+       asp-action="Index"
+       class="back-button">
+        ← Вернуться в магазин
+    </a>
+
+    <div class="product">
+        <div class="product-image">
+            <img src="@Model.ImageUrl" alt="@Model.Name" />
+        </div>
+
+        <div class="product-info">
+            <span class="product-weapon">@Model.Weapon</span>
+            <h1>@Model.Name</h1>
+
+            <p class="product-description">
+                Популярный скин для Counter-Strike 2. Отличный выбор для твоего инвентаря и коллекции.
+            </p>
+
+            <div class="product-price">$@Model.Price</div>
+
+            <div class="product-stock">
+                В наличии: <strong>@Model.Stock шт.</strong>
+            </div>
+
+            <a asp-controller="Cart"
+               asp-action="Add"
+               asp-route-id="@Model.Id"
+               class="buy-button">
+                Добавить в корзину
+            </a>
+        </div>
+    </div>
+</div>

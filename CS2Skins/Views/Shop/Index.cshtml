@@ -1,0 +1,51 @@
+@model List<CS2Skins.Models.Skin>
+
+@{
+    ViewData["Title"] = "Магазин";
+}
+
+<div class="shop-page">
+    <div class="shop-heading">
+        <span class="section-label">Магазин</span>
+        <h1>Профессиональные скины CS2</h1>
+        <p>Выбери любимый скин и добавь его в корзину.</p>
+    </div>
+
+    <div class="shop-filters">
+        <input type="text" placeholder="Поиск по скинам" />
+        <button type="button" class="filter-active">Все</button>
+        <button type="button">AK-47</button>
+        <button type="button">AWP</button>
+        <button type="button">M4A1-S</button>
+    </div>
+
+    <div class="skin-grid">
+        @foreach (var skin in Model)
+        {
+            <article class="shop-skin-card">
+                <div class="skin-preview">
+                    <img src="@skin.ImageUrl" alt="@skin.Name" />
+                </div>
+
+                <div class="skin-info">
+                    <small>@skin.Weapon</small>
+                    <h3>@skin.Name</h3>
+
+                    <div class="skin-bottom">
+                        <div>
+                            <strong>$@skin.Price</strong>
+                            <span>В наличии: @skin.Stock</span>
+                        </div>
+
+                        <a asp-controller="Cart"
+                           asp-action="Add"
+                           asp-route-id="@skin.Id"
+                           class="add-cart">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</div>
